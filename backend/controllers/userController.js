@@ -1,11 +1,18 @@
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 
-// @desc    Fetch all user
+// @desc    Fetch all users
 // @route   GET /api/users
 // @access  Public
-export const getAllUsers = (req, res) => {
-    res.send({message: 'All Users'});
+export const getAllUsers = async (req, res) => {
+    try {
+        
+        const users = await User.find().select("-password");
+        res.status(200).json(users);
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
 }
 
 
