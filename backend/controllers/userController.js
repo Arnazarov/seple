@@ -1,4 +1,5 @@
-import User from "../models/userModel.js";
+import User from '../models/userModel.js';
+import bcrypt from 'bcryptjs';
 
 // @desc    Fetch all user
 // @route   GET /api/users
@@ -33,6 +34,36 @@ export const registerUser = async (req, res) => {
         } else {
             res.status(400).json('Invalid user data')
         }
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+
+// @desc    Authenticate user
+// @route   POST /api/users/login
+// @access  Public
+export const authUser = async (req, res) => {
+    try {
+
+        const { email, password } = req.body;
+
+        const userExists = await User.findOne({email});
+        const matchPassword = bcrypt.compare(password, userExists.password)
+        
+        if (userExists && matchPassword) {
+            res.status(200).json({
+                name: userExists.name,
+                email: userExists.email,
+                isAdmin: userExists.isAdmin,
+                followers: userExists.followers,
+                following: userExists.following
+            })
+        } else {
+            res.status(400).json({message: 'Invalid username or password'});
+        }
+
+
     } catch (error) {
         res.status(500).json({message: error.message});
     }
