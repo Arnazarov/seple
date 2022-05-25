@@ -111,7 +111,9 @@ export const updateUserById = async (req, res) => {
 
         if (user) {
 
-            const updatedUser = await User.findOneAndUpdate({id}, req.body, {new: true});
+            Object.assign(user, req.body);
+
+            const updatedUser = await user.save();
 
             res.status(200).json(updatedUser);
 
