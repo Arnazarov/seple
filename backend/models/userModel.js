@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema({
     coverImg: { type: String, default: ""},
     followers: { type: Array, default: []},
     following: { type: Array, default: []},
-    isAdmin: { type: Boolean, default: false}
+    isAdmin: { type: Boolean, default: false},
+    desc: { type:String, max:50},
+    currentCity: { type:String, max:50},
+    hometown: { type: String, max:50},
+    relationship: {type: Number, enum: [1, 2, 3]}
 }, {timestamps: true});
 
 
@@ -18,7 +22,7 @@ userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         next();
     }
-    
+
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
 })
