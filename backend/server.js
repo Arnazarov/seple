@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import mongoConnect from './config/mongodb.js';
+import userRoutes from './routes/userRoutes.js'
 
 // Configure environment variables
 dotenv.config();
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
+
+app.use('/api/users', userRoutes);
 
 
 
