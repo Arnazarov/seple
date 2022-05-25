@@ -75,3 +75,25 @@ export const authUser = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+
+// @desc Fetch a user by id
+// @route /api/users/:id
+// @access Public
+
+export const getUserById = async (req, res) => {
+    try {
+        
+        const { id } = req.params;
+
+        const user = await User.findById(id).select('-password');
+
+        if (user) {
+            res.status(200).json(user)
+        } else {
+            res.status(404).json({ message: 'Not found'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
