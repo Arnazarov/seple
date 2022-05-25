@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 
 
 // Hash password when it is modified or created
-userSchema.pre('save', async function(next) {
+userSchema.pre('save',  async function(next) {
     if (!this.isModified('password')) {
         next();
     }
@@ -26,6 +26,18 @@ userSchema.pre('save', async function(next) {
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
 })
+
+userSchema.pre('findOneAndUpdate',  async function(next) {
+    if (!this._update.password) {
+        next();
+    }
+
+    const salt = await bcrypt.genSalt(12);
+    this._update.password = await bcrypt.hash(this._update.password, salt);
+})
+
+
+
 
 const User = mongoose.model("User", userSchema);
 

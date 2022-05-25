@@ -76,9 +76,9 @@ export const authUser = async (req, res) => {
     }
 }
 
-// @desc Fetch a user by id
-// @route /api/users/:id
-// @access Public
+// @desc    Fetch a user by id
+// @route   GET /api/users/:id
+// @access  Public
 
 export const getUserById = async (req, res) => {
     try {
@@ -91,6 +91,32 @@ export const getUserById = async (req, res) => {
             res.status(200).json(user)
         } else {
             res.status(404).json({ message: 'Not found'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+// @desc    Update a user
+// @route   PUT /api/users/:id
+// @access  Private
+
+export const updateUserById = async (req, res) => {
+    try {
+        
+        const { params: {id}} = req;
+
+        const user = await User.findById(id);
+
+        if (user) {
+
+            const updatedUser = await User.findOneAndUpdate({id}, req.body, {new: true});
+
+            res.status(200).json(updatedUser);
+
+        } else {
+            res.status(404).json({ message: 'User not found'});
         }
 
     } catch (error) {
