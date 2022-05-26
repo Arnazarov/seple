@@ -39,16 +39,18 @@ export const updatePost = async (req, res) => {
         const {params: {id}, body: {userID}} = req;
         const post = await Post.findById(id);
 
-        if (userID !== String(post.userID)) {
-            return res.status(403).json({message: 'You can modify only your posts!'});
-        }
-
         if (post) {
+
+            if (userID !== String(post.userID)) {
+                return res.status(403).json({message: 'You can modify only your posts!'});
+            }
+
             const newPost = Object.assign(post, req.body);
             delete newPost.userID;
 
             const updatedPost = await newPost.save();
             res.status(200).json(updatedPost);
+
         } else {
             res.status(400).json({message: 'Post does not exist'});
         }
@@ -64,11 +66,22 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     try {
 
-        const post = new Post(req.body);
+        const {params: {id}, body: {userID}} = req;
+        const post = await Post.findById(id);
 
-        const createdPost = await post.save();
+        if (post) {
 
-        res.status(200).json(createdPost);
+            if (userID !== String(post.userID)) {
+                return res.status(403).json({message: 'You can delete only your posts!'});
+            }
+
+            await post.remove();
+            res.status(200).json({message: 'Post deleted successfully!'});
+            
+        } else {
+            res.status(400).json({message: 'Post does not exist'});
+        }
+
 
     } catch (error) {
         res.status(500).json({message: error.message});

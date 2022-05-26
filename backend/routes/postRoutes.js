@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPost, fetchPosts, updatePost } from '../controllers/postController.js';
+import { createPost, deletePost, fetchPosts, updatePost } from '../controllers/postController.js';
 
 const router = express.Router();
 
@@ -8,6 +8,7 @@ router.route('/')
     .post(createPost);
 
 router.route('/:id')
-    .put(updatePost);
+    .put(updatePost)
+    .delete(deletePost);
 
 export default router;
