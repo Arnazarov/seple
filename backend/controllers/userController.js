@@ -85,7 +85,7 @@ export const getUserById = async (req, res) => {
         
         const { id } = req.params;
 
-        const user = await User.findById(id).select('-password');
+        const user = await User.findById(id).select('name email followers following desc currentCity hometown relationship');
 
         if (user) {
             res.status(200).json(user)
@@ -105,20 +105,85 @@ export const getUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
     try {
         
-        const { params: {id}} = req;
+        const { params: {id}, body: {userID}} = req;
 
         const user = await User.findById(id);
 
-        if (user) {
+        if (user && userID === String(user._id)) {
 
-            Object.assign(user, req.body);
+            // copies all enumerable own properties from req.body to user
+            const newUser = Object.assign(user, req.body);
+            delete newUser.userID;
 
-            const updatedUser = await user.save();
-
+            const updatedUser = await newUser.save();
             res.status(200).json(updatedUser);
 
         } else {
             res.status(404).json({ message: 'User not found'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+// @desc    Delete a user by id
+// @route   /api/users/:id
+// @access  Private
+
+export const deleteUserById = async (req, res) => {
+    try {
+        
+        const { params:{id}, body: {userID} } = req;
+
+        const userExists = await User.findById(id);
+
+        if (userExists && userID === userExists._id) {
+            await userExists.remove();
+            res.status(200).json({ message: 'User deleted'});
+        } else {
+            res.status(404).json({ message: 'User not found'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+// @desc    Follow a user
+// @route   PUT /api/users/:id/follow
+// @access  Private
+
+export const followUser = async (req, res) => {
+    try {
+        
+        const { params: {id}, body: {userID}} = req;
+
+        const userToFollow = await User.findById(id);
+        const currentUser = await User.findById(userID);
+
+
+        // Check whether user wants to follow other than him/herself (currentUser)
+        if (userID === id) {
+            return res.status(403).json({ message: 'You cannot follow yourself!'});
+        }
+
+
+        // Check whether user he/she (currentUser) wants to follow exists
+        if (userToFollow) {
+
+            if (!userToFollow.followers.includes(userID)) {
+
+                await userToFollow.updateOne({$push: {followers: userID}});
+                await currentUser.updateOne({$push: {following: id}});
+                res.status(200).json({ message: 'You successfully followed this user!'});
+
+            } else {
+                res.status(403).json({ message: 'You are already following this user!'});
+            }
+
+        } else {
+            res.status(404).json({ message: 'User you are trying to follow is not found!'});
         }
 
     } catch (error) {
