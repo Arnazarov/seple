@@ -88,3 +88,30 @@ export const deletePost = async (req, res) => {
     }
 }
 
+// @desc    Like/Unlike a post
+// @route   PUT /api/post/:id/like
+// @access  Private
+export const likePost = async (req, res) => {
+    try {
+
+        const {params: {id}, body: {userID}} = req;
+        const post = await Post.findById(id);
+
+        if (post) {
+
+            if (post.likes.includes(userID)) {
+                await post.updateOne({$pull: {likes: userID}});
+                res.status(400).json({message: 'You have disliked this post!'});
+            } else {
+                await post.updateOne({$push: {likes: userID}});
+                res.status(200).json({message: 'You have liked this post!'});
+            }
+            
+        } else {
+            res.status(400).json({message: 'Post does not exist'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
