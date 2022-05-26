@@ -13,6 +13,20 @@ export const fetchPosts = async (req, res) => {
     }
 }
 
+// @desc    Fetch single post
+// @route   GET /api/posts/:id
+// @access  Public
+export const fetchPost = async (req, res) => {
+    try {
+
+        const post = await Post.findById(req.params.id);
+        res.status(200).json(post);
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
 // @desc    Create a post
 // @route   POST /api/posts
 // @access  Private
