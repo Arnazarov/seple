@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import mongoConnect from './config/mongodb.js';
 import userRoutes from './routes/userRoutes.js'
+import postRoutes from './routes/postRoutes.js'
 
 // Configure environment variables
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 
 
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 
 
