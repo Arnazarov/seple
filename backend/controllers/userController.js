@@ -190,3 +190,44 @@ export const followUser = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+
+// @desc    Unfollow a user
+// @route   PUT /api/users/:id/unfollow
+// @access  Private
+
+export const unfollowUser = async (req, res) => {
+    try {
+        
+        const { params: {id}, body: {userID}} = req;
+
+        const userToFollow = await User.findById(id);
+        const currentUser = await User.findById(userID);
+
+
+        // Check whether user wants to follow other than him/herself (currentUser)
+        if (userID === id) {
+            return res.status(403).json({ message: 'You cannot unfollow yourself!'});
+        }
+
+
+        // Check whether user he/she (currentUser) wants to follow exists
+        if (userToFollow) {
+
+            if (userToFollow.followers.includes(userID)) {
+
+                await userToFollow.updateOne({$pull: {followers: userID}});
+                await currentUser.updateOne({$pull: {following: id}});
+                res.status(200).json({ message: 'You have unsubscribed from the user!!'});
+
+            } else {
+                res.status(403).json({ message: 'You are not following this user!'});
+            }
+
+        } else {
+            res.status(404).json({ message: 'You are trying to unsubscribe from a non-existent user!'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
