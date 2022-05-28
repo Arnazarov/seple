@@ -11,7 +11,7 @@ export default function Topbar() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <span className={styles.logo}>SepleSocial</span>
+        <span className={styles.logo}>SepleConnect</span>
       </div>
       <div className={styles.center}>
         <div className={styles.searchBar}>
