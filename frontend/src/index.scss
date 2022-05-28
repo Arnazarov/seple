@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,800;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+// Fonts
+$Raleway: 'Raleway', sans-serif;
+$Lobster: 'Lobster Two', sans-serif;
+$Mali: 'Mali', cursive;
+
+// Colors
+$dark: rgb(29, 29, 29);
+$white: #fff;
+
+// Size
+$size-sm: 12px;
+$size-md: 16px;
+$size-lg: 24px;
+
+// Mixins
+@mixin flexCenter($dir) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $dir;
+}
+
+* {
+  font-family: $Raleway;
+  margin: 0;
+}
