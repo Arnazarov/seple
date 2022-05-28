@@ -9,7 +9,7 @@ $Mali: 'Mali', cursive;
 
 // Colors
 $dark: rgb(29, 29, 29);
-$white: #fff;
+$light: #fff;
 
 // Size
 $size-sm: 12px;
@@ -17,9 +17,9 @@ $size-md: 16px;
 $size-lg: 24px;
 
 // Mixins
-@mixin flexCenter($dir) {
+@mixin flexCenter($dir, $jc) {
   display: flex;
-  justify-content: center;
+  justify-content: $jc;
   align-items: center;
   flex-direction: $dir;
 }
