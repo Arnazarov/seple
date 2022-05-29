@@ -9,8 +9,6 @@ const Feed = () => {
         <Share />
         <Post />
         <Post />
-        <Post />
-        <Post />
       </div>
     </div>
   );
