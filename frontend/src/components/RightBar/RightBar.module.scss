@@ -62,5 +62,44 @@
         }
       }
     }
+
+    .profileTitle {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .profileInfo {
+      margin-bottom: 25px;
+      .item {
+        margin-bottom: 10px;
+        .itemName {
+          font-weight: 500;
+          margin-right: 10px;
+        }
+        .itemDesc {
+          font-weight: 300;
+        }
+      }
+    }
+
+    .friendsInfo {
+      @include flexCenter(row, space-between);
+      flex-wrap: wrap;
+
+      .following {
+        @include flexCenter(column, flex-start);
+        margin-bottom: 15px;
+
+        .friendImg {
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          object-fit: cover;
+        }
+        .friendDesc {
+        }
+      }
+    }
   }
 }

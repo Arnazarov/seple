@@ -1,9 +1,9 @@
 import styles from './RightBar.module.scss';
 
-const RightBar = () => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
+const RightBar = ({ profile }) => {
+  function HomeRB() {
+    return (
+      <>
         <div className={styles.birthday}>
           <img className={styles.birthdayImg} src="assets/gift.png" alt="" />
           <span className={styles.birthdayText}>
@@ -25,7 +25,77 @@ const RightBar = () => {
             <span className={styles.name}>Ipek Cinar</span>
           </li>
         </ul>
-      </div>
+      </>
+    );
+  }
+
+  function UserRB() {
+    return (
+      <>
+        <h4 className={styles.profileTitle}>Profile</h4>
+        <div className={styles.profileInfo}>
+          <div className={styles.item}>
+            <span className={styles.itemName}>City: </span>
+            <span className={styles.itemDesc}>Chicago</span>
+          </div>
+          <div className={styles.item}>
+            <span className={styles.itemName}>From: </span>
+            <span className={styles.itemDesc}>Gazojak</span>
+          </div>
+          <div className={styles.item}>
+            <span className={styles.itemName}>Status: </span>
+            <span className={styles.itemDesc}>Single</span>
+          </div>
+        </div>
+        <h4 className={styles.profileTitle}>Friends</h4>
+        <div className={styles.friendsInfo}>
+          <div className={styles.following}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt=""
+              className={styles.friendImg}
+            />
+            <span className={styles.friendDesc}>Luka Modric</span>
+          </div>
+          <div className={styles.following}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt=""
+              className={styles.friendImg}
+            />
+            <span className={styles.friendDesc}>Luka Modric</span>
+          </div>
+          <div className={styles.following}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt=""
+              className={styles.friendImg}
+            />
+            <span className={styles.friendDesc}>Luka Modric</span>
+          </div>
+          <div className={styles.following}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt=""
+              className={styles.friendImg}
+            />
+            <span className={styles.friendDesc}>Luka Modric</span>
+          </div>
+          <div className={styles.following}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt=""
+              className={styles.friendImg}
+            />
+            <span className={styles.friendDesc}>Luka Modric</span>
+          </div>
+        </div>
+      </>
+    );
+  }
+  return (
+    <div className={styles.container}>
+      <div className={styles.wrapper}>{profile ? <UserRB /> : <HomeRB />}</div>
     </div>
   );
 };

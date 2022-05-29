@@ -19,7 +19,7 @@ export default function Topbar() {
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
           <input
-            placeholder="Search for friend, post or video"
+            placeholder="Search for a friend, post or video"
             className={styles.searchInput}
           />
         </div>

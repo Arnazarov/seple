@@ -5,6 +5,7 @@ import Feed from '../../components/Feed/Feed';
 import styles from './User.module.scss';
 
 const User = () => {
+  const profile = 'User';
   return (
     <>
       <Header />
@@ -31,7 +32,7 @@ const User = () => {
           </div>
           <div className={styles.bottom}>
             <Feed />
-            <RightBar />
+            <RightBar profile={profile} />
           </div>
         </div>
       </div>
