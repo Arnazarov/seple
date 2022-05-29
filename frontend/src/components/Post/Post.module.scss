@@ -1,0 +1,74 @@
+@import '../../index.scss';
+
+.container {
+  width: 100%;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 15px -9px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 15px -9px rgba(0, 0, 0, 0.7);
+  margin: 15px 0;
+
+  .wrapper {
+    padding: 10px;
+
+    .top {
+      @include flexCenter(row, space-between);
+
+      .topL {
+        @include flexCenter(row, flex-start);
+
+        .profileImg {
+          @include imageContainer(32, 32);
+        }
+        .profileName {
+          font-size: 15px;
+          font-weight: 500;
+          margin: 0 10px;
+        }
+        .profileDate {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .center {
+      margin: 15px 0;
+
+      .postImg {
+        margin-top: 15px;
+        width: 100%;
+        max-height: 330px;
+        object-fit: contain;
+      }
+    }
+
+    .bottom {
+      @include flexCenter(row, space-between);
+      font-size: 13px;
+
+      .bottomL {
+        @include flexCenter(row, flex-start);
+
+        .icon {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          margin-right: 5px;
+        }
+
+        .likeCounter {
+          font-family: $Lobster;
+          letter-spacing: 1px;
+        }
+      }
+
+      .bottomR {
+        .comment {
+          cursor: pointer;
+          font-family: $Lobster;
+          letter-spacing: 1px;
+          border-bottom: 1px dotted rgb(85, 81, 81);
+        }
+      }
+    }
+  }
+}
