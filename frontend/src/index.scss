@@ -24,6 +24,13 @@ $size-lg: 24px;
   flex-direction: $dir;
 }
 
+@mixin flexCustom($dir, $jc, $ai) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $dir;
+}
+
 @mixin imageContainer($w, $h) {
   width: $w * 1px;
   height: $h * 1px;

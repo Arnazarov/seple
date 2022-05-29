@@ -1,0 +1,106 @@
+@import '../../index.scss';
+
+.container {
+  @include flexCenter(row, center);
+  width: 100vw;
+  height: 100vh;
+  background-color: #add6fb;
+
+  .wrapper {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+
+    .left {
+      flex: 1;
+      @include flexCustom(column, center, center);
+
+      .logo {
+        font-size: 60px;
+        font-weight: 700;
+        color: #035397;
+      }
+
+      .desc {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 500;
+        font-family: $Mali;
+        color: #035397;
+      }
+    }
+
+    .right {
+      flex: 2;
+      @include flexCustom(column, flex-start, center);
+
+      .login {
+        @include flexCustom(column, space-evenly, stretch);
+        height: 300px;
+        width: 400px;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 8px;
+        -webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.84);
+        box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.84);
+
+        @media screen and (max-width: 470px) {
+          width: auto;
+        }
+        .input {
+          height: 50px;
+          border-radius: 5px;
+          border: 0.7px solid #5189ba;
+          font-size: 15px;
+          padding-left: 20px;
+
+          &:focus {
+            outline: none;
+          }
+
+          &::placeholder {
+            color: #035397;
+          }
+        }
+
+        .btnLog {
+          height: 50px;
+          border-radius: 10px;
+          border: 1px solid #a2d2ff;
+          background-color: #4d96ff;
+          color: white;
+          font-size: 20px;
+          font-weight: 500;
+          cursor: pointer;
+          &:hover {
+            background-color: #a2d2ff;
+            color: #035397;
+          }
+        }
+
+        .msg {
+          font-size: 14px;
+          font-weight: 500;
+          color: #035397;
+        }
+
+        .btnReg {
+          height: 50px;
+          padding: 0 20px;
+          border-radius: 10px;
+          border: 1px solid #b4e197;
+          background-color: #83bd75;
+          color: white;
+          font-size: 20px;
+          font-weight: 500;
+          cursor: pointer;
+          &:hover {
+            background-color: #b4e197;
+            color: #5eaf4a;
+          }
+        }
+      }
+    }
+  }
+}
