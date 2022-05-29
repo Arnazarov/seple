@@ -17,17 +17,18 @@
       font-size: 30px;
       margin-left: 30px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: white;
       cursor: pointer;
+      text-shadow: -1px -1px 3px rgb(232, 249, 253, 0.9);
     }
   }
 
   .center {
-    flex: 5;
-
+    flex: 6;
+    @include flexCenter(row, center);
     .searchBar {
-      width: 100%;
+      width: 95%;
       height: 30px;
       background-color: white;
       border-radius: 30px;
@@ -50,7 +51,7 @@
   }
 
   .right {
-    flex: 4;
+    flex: 3;
     @include flexCenter(row, space-around);
     color: $light;
     .link {

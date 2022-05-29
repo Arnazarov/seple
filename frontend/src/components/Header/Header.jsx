@@ -26,7 +26,6 @@ export default function Topbar() {
       </div>
       <div className={styles.right}>
         <div className={styles.links}>
-          <span className={styles.link}>Homepage</span>
           <span className={styles.link}>Timeline</span>
         </div>
         <div className={styles.icons}>
