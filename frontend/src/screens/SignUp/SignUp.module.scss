@@ -37,6 +37,7 @@
 
       .login {
         @include flexCustom(column, space-evenly, stretch);
+        min-height: 400px;
         height: 100%;
         width: 400px;
         padding: 20px 30px;
