@@ -10,7 +10,7 @@ $Mali: 'Mali', cursive;
 // Colors
 $dark: rgb(29, 29, 29);
 $light: #fff;
-
+$primary: #1877f2;
 // Size
 $size-sm: 12px;
 $size-md: 16px;
@@ -22,6 +22,13 @@ $size-lg: 24px;
   justify-content: $jc;
   align-items: center;
   flex-direction: $dir;
+}
+
+@mixin imageContainer($w, $h) {
+  width: $w * 1px;
+  height: $h * 1px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 * {

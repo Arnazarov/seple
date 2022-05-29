@@ -1,0 +1,63 @@
+@import '../../index.scss';
+
+.container {
+  width: 100%;
+  height: 170px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 15px -9px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 15px -9px rgba(0, 0, 0, 0.7);
+
+  .wrapper {
+    padding: 20px;
+
+    .top {
+      @include flexCenter(row, flex-start);
+
+      .profileImg {
+        @include imageContainer(50, 50);
+        margin-right: 10px;
+      }
+
+      .input {
+        border: none;
+        width: 80%;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .line {
+      margin: 15px;
+    }
+
+    .bottom {
+      @include flexCenter(row, space-between);
+      .options {
+        display: flex;
+        margin-left: 20px;
+
+        .share {
+          @include flexCenter(row, center);
+          margin-right: 15px;
+          cursor: pointer;
+
+          .icon {
+            font-size: 18px;
+            margin-right: 3px;
+          }
+        }
+      }
+      .btn {
+        border: none;
+        padding: 7px;
+        border-radius: 5px;
+        background-color: $primary;
+        font-weight: 500;
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+}

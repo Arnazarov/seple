@@ -4,7 +4,7 @@
   @include flexCenter(row, center);
   height: 50px;
   width: 100%;
-  background-color: #1877f2;
+  background-color: $primary;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -31,12 +31,11 @@
       height: 30px;
       background-color: white;
       border-radius: 30px;
-      display: flex;
-      align-items: center;
+      @include flexCenter(row, flex-start);
 
       .searchIcon {
-        font-size: 20px !important;
-        margin-left: 10px;
+        font-size: 12px !important;
+        margin: 0 10px;
       }
 
       .searchInput {
@@ -67,10 +66,9 @@
         margin-right: 15px;
         cursor: pointer;
         position: relative;
-
         .icon {
-          height: 18px !important;
-          width: 22px !important;
+          height: 15px !important;
+          width: 18px !important;
         }
 
         .iconBadge {
