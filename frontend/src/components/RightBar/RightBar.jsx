@@ -7,7 +7,7 @@ const RightBar = ({ profile }) => {
         <div className={styles.birthday}>
           <img className={styles.birthdayImg} src="assets/gift.png" alt="" />
           <span className={styles.birthdayText}>
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
+            <b>Pola Foster</b> and <b>3 other friends</b> have a birthday today.
           </span>
         </div>
         <img className={styles.ad} src="assets/ad.png" alt="" />
