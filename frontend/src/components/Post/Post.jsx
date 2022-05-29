@@ -1,7 +1,15 @@
 import styles from './Post.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 const Posts = () => {
+  const [like, setLike] = useState(1);
+  const [liked, setLiked] = useState(false);
+
+  const likeBtnHandler = (e) => {
+    setLike(liked ? like - 1 : like + 1);
+    setLiked(!liked);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -28,8 +36,13 @@ const Posts = () => {
         <div className={styles.bottom}>
           <div className={styles.bottomL}>
             <img src="/assets/heart.png" alt="" className={styles.icon} />
-            <img src="/assets/like.png" alt="" className={styles.icon} />
-            <span className={styles.likeCounter}>14 people liked it</span>
+            <img
+              src="/assets/like.png"
+              alt=""
+              className={styles.icon}
+              onClick={likeBtnHandler}
+            />
+            <span className={styles.likeCounter}>{like} people liked it</span>
           </div>
           <div className={styles.bottomR}>
             <span className={styles.comment}>7 comments</span>

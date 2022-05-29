@@ -1,9 +1,11 @@
 @import '../../index.scss';
 
 .container {
-  flex: 3.5;
+  flex: 3;
   height: calc(100vh - 50px);
   overflow-y: scroll;
+  position: sticky;
+  top: 50px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -50,6 +52,11 @@
 
     .line {
       margin: 20px 0;
+    }
+
+    .title {
+      font-size: 16px;
+      margin-bottom: 10px;
     }
 
     .friendList {

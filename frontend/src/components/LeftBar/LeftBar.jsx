@@ -47,6 +47,7 @@ const LeftBar = () => {
         </ul>
         <button className={styles.btn}>Show More</button>
         <hr className={styles.line}></hr>
+        <h4 className={styles.title}>All Friends</h4>
         <ul className={styles.friendList}>
           <li className={styles.friend}>
             <img

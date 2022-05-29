@@ -22,7 +22,7 @@
         .profileName {
           font-size: 15px;
           font-weight: 500;
-          margin: 0 10px;
+          margin: 0 10px 0 5px;
         }
         .profileDate {
           font-size: 12px;
@@ -32,6 +32,10 @@
 
     .center {
       margin: 15px 0;
+
+      .postText {
+        margin-left: 10px;
+      }
 
       .postImg {
         margin-top: 15px;

@@ -21,6 +21,8 @@
       .input {
         border: none;
         width: 80%;
+        font-size: 16px;
+        font-style: italic;
 
         &:focus {
           outline: none;
@@ -57,6 +59,7 @@
         font-weight: 500;
         cursor: pointer;
         color: white;
+        margin-right: 10px;
       }
     }
   }
