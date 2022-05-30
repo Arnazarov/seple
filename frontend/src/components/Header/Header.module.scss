@@ -12,15 +12,18 @@
   .left {
     flex: 3;
 
-    .logo {
-      font-family: $Lobster;
-      font-size: 30px;
-      margin-left: 30px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: white;
-      cursor: pointer;
-      text-shadow: -1px -1px 3px rgb(232, 249, 253, 0.9);
+    .link {
+      text-decoration: none;
+      .logo {
+        font-family: $Lobster;
+        font-size: 30px;
+        margin-left: 30px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: white;
+        cursor: pointer;
+        text-shadow: -1px -1px 3px rgb(232, 249, 253, 0.9);
+      }
     }
   }
 

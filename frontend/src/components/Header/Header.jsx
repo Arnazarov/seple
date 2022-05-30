@@ -6,12 +6,15 @@ import {
   faMagnifyingGlass,
   faBell,
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export default function Topbar() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <span className={styles.logo}>Seple</span>
+        <Link to="/" className={styles.link}>
+          <span className={styles.logo}>Seple</span>
+        </Link>
       </div>
       <div className={styles.center}>
         <div className={styles.searchBar}>
