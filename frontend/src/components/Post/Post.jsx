@@ -2,6 +2,7 @@ import styles from './Post.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -33,11 +34,13 @@ const Posts = ({ post }) => {
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.topL}>
-            <img
-              src={user.profileImg || '../assets/person/noAvatar.png'}
-              alt=""
-              className={styles.profileImg}
-            />
+            <Link to={`/profile/${user.name}`}>
+              <img
+                src={user.profileImg || '../assets/person/noAvatar.png'}
+                alt=""
+                className={styles.profileImg}
+              />
+            </Link>
             <span className={styles.profileName}>{user.name}</span>
             <span className={styles.profileDate}>
               {moment(post.createdAt).fromNow()}
@@ -53,13 +56,14 @@ const Posts = ({ post }) => {
         </div>
         <div className={styles.bottom}>
           <div className={styles.bottomL}>
-            <img src="/assets/heart.png" alt="" className={styles.icon} />
             <img
               src="/assets/like.png"
               alt=""
               className={styles.icon}
               onClick={likeBtnHandler}
             />
+            <img src="/assets/heart.png" alt="" className={styles.icon} />
+
             <span className={styles.likeCounter}>{like} people liked it</span>
           </div>
           <div className={styles.bottomR}>

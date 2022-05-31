@@ -2,10 +2,11 @@ import express from 'express';
 import {
   createPost,
   deletePost,
-  fetchPosts,
+  fetchTimelinePosts,
   likePost,
   updatePost,
   fetchPost,
+  fetchUserPosts,
 } from '../controllers/postController.js';
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.route('/:id').get(fetchPost).put(updatePost).delete(deletePost);
 
 router.route('/:id/like').put(likePost);
 
-router.route('/timeline/:id').get(fetchPosts);
+router.route('/timeline/:id').get(fetchTimelinePosts);
+
+router.route('/profile/:username').get(fetchUserPosts);
 
 export default router;

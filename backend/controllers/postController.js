@@ -4,7 +4,7 @@ import User from '../models/userModel.js';
 // @desc    Fetch timeline posts
 // @route   GET /api/posts/timeline/:id
 // @access  Public
-export const fetchPosts = async (req, res) => {
+export const fetchTimelinePosts = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -17,6 +17,25 @@ export const fetchPosts = async (req, res) => {
       );
 
       res.status(200).json(currUserPosts.concat(...followingUsersPosts));
+    } else {
+      res.status(400).json({ message: 'User not found!' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Fetch posts of a single user
+// @route   GET /api/posts/profile/:id
+// @access  Public
+export const fetchUserPosts = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const currUser = await User.findOne({ name: username });
+
+    if (currUser) {
+      const currUserPosts = await Post.find({ userID: currUser._id });
+      res.status(200).json(currUserPosts);
     } else {
       res.status(400).json({ message: 'User not found!' });
     }
