@@ -1,6 +1,14 @@
 import styles from './Login.module.scss';
+import { useRef } from 'react';
 
 const Login = () => {
+  const email = useRef();
+  const password = useRef();
+  const loginHandler = (e) => {
+    e.preventDefault();
+    console.log(email.current.value);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -11,21 +19,25 @@ const Login = () => {
           </span>
         </div>
         <div className={styles.right}>
-          <div className={styles.login}>
+          <form className={styles.login} onSubmit={loginHandler}>
             <input
               className={styles.input}
+              required
+              ref={email}
               type="email"
               placeholder="Enter your email"
             />
             <input
               className={styles.input}
-              type="text"
+              required
+              ref={password}
+              type="password"
               placeholder="Enter your password"
             />
             <button className={styles.btnLog}>Sign In</button>
             <span className={styles.msg}>Forgot Password? Sign Up here.</span>
             <button className={styles.btnReg}>Sign Up</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
