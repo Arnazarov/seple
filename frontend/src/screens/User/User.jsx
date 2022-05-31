@@ -16,12 +16,12 @@ const User = () => {
             <div className={styles.cover}>
               <img
                 className={styles.coverImg}
-                src="/assets/post/4.jpeg"
+                src="/assets/person/kantCover.png"
                 alt=""
               />
               <img
                 className={styles.userImg}
-                src="/assets/person/6.jpeg"
+                src="/assets/person/kant.png"
                 alt=""
               />
             </div>

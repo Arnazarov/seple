@@ -10,7 +10,7 @@ const RightBar = ({ profile }) => {
             <b>Pola Foster</b> and <b>3 other friends</b> have a birthday today.
           </span>
         </div>
-        <img className={styles.ad} src="assets/ad.png" alt="" />
+        <img className={styles.ad} src="assets/ad.jpg" alt="" />
         <h4 className={styles.title}>Online Friends</h4>
         <ul className={styles.friends}>
           <li className={styles.friend}>
@@ -18,7 +18,7 @@ const RightBar = ({ profile }) => {
               <img
                 className={styles.profileImg}
                 alt=""
-                src="/assets/person/1.jpeg"
+                src="/assets/person/plato.png"
               />
               <span className={styles.online}></span>
             </div>
@@ -51,39 +51,7 @@ const RightBar = ({ profile }) => {
         <div className={styles.friendsInfo}>
           <div className={styles.following}>
             <img
-              src="/assets/person/1.jpeg"
-              alt=""
-              className={styles.friendImg}
-            />
-            <span className={styles.friendDesc}>Luka Modric</span>
-          </div>
-          <div className={styles.following}>
-            <img
-              src="/assets/person/1.jpeg"
-              alt=""
-              className={styles.friendImg}
-            />
-            <span className={styles.friendDesc}>Luka Modric</span>
-          </div>
-          <div className={styles.following}>
-            <img
-              src="/assets/person/1.jpeg"
-              alt=""
-              className={styles.friendImg}
-            />
-            <span className={styles.friendDesc}>Luka Modric</span>
-          </div>
-          <div className={styles.following}>
-            <img
-              src="/assets/person/1.jpeg"
-              alt=""
-              className={styles.friendImg}
-            />
-            <span className={styles.friendDesc}>Luka Modric</span>
-          </div>
-          <div className={styles.following}>
-            <img
-              src="/assets/person/1.jpeg"
+              src="/assets/person/plato.png"
               alt=""
               className={styles.friendImg}
             />

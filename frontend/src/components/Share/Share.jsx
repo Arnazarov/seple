@@ -15,7 +15,7 @@ const Share = () => {
           <img
             className={styles.profileImg}
             alt=""
-            src="/assets/person/1.jpeg"
+            src="/assets/person/plato.png"
           />
           <input
             className={styles.input}

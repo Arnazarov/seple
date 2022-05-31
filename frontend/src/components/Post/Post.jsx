@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
+
 const Posts = ({ post }) => {
   const [user, setUser] = useState({});
   const [like, setLike] = useState(1);
@@ -19,22 +21,27 @@ const Posts = ({ post }) => {
       try {
         const { data } = await axios.get(`/api/users/${post?.userID}`);
         setUser(data);
-        console.log(data);
       } catch (error) {
         console.log(error.message);
       }
     };
     getUser();
-  }, []);
+  }, [post.userID]);
 
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.topL}>
-            <img src={user.profileImg} alt="" className={styles.profileImg} />
+            <img
+              src={user.profileImg || '../assets/person/noAvatar.png'}
+              alt=""
+              className={styles.profileImg}
+            />
             <span className={styles.profileName}>{user.name}</span>
-            <span className={styles.profileDate}>1 min ago</span>
+            <span className={styles.profileDate}>
+              {moment(post.createdAt).fromNow()}
+            </span>
           </div>
           <div className={styles.topR}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
