@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 const User = () => {
   const [user, setUser] = useState({});
   const { name } = useParams();
-  console.log(name);
 
   useEffect(() => {
     // Fetch the current user
@@ -32,8 +31,16 @@ const User = () => {
         <div className={styles.right}>
           <div className={styles.top}>
             <div className={styles.cover}>
-              <img className={styles.coverImg} src={user.coverImg} alt="" />
-              <img className={styles.userImg} src={user.profileImg} alt="" />
+              <img
+                className={styles.coverImg}
+                src={user.coverImg || '/assets/person/noCover.png'}
+                alt=""
+              />
+              <img
+                className={styles.userImg}
+                src={user.profileImg || '/assets/person/noAvatar.png'}
+                alt=""
+              />
             </div>
             <div className={styles.info}>
               <h4 className={styles.infoName}>{user.name}</h4>

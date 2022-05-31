@@ -23,7 +23,7 @@ const RightBar = ({ user }) => {
               />
               <span className={styles.online}></span>
             </div>
-            <span className={styles.name}>Ipek Cinar</span>
+            <span className={styles.name}>Plato</span>
           </li>
         </ul>
       </>

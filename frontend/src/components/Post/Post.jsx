@@ -8,7 +8,7 @@ import moment from 'moment';
 
 const Posts = ({ post }) => {
   const [user, setUser] = useState({});
-  const [like, setLike] = useState(1);
+  const [like, setLike] = useState(100);
   const [liked, setLiked] = useState(false);
 
   const likeBtnHandler = (e) => {
