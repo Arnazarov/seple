@@ -65,14 +65,18 @@ export const authUser = async (req, res) => {
 };
 
 // @desc    Fetch a user by id
-// @route   GET /api/users/:id
+// @route   GET /api/users?username?userID
 // @access  Public
 
 export const getUserById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { username, userID } = req.query;
 
-    const user = await User.findById(id).select('-password');
+    const user = username
+      ? await User.findOne({ name: username }).select('-password')
+      : userID
+      ? await User.findById(userID).select('-password')
+      : null;
 
     if (user) {
       res.status(200).json(user);

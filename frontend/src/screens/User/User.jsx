@@ -3,9 +3,27 @@ import LeftBar from '../../components/LeftBar/LeftBar';
 import RightBar from '../../components/RightBar/RightBar';
 import Feed from '../../components/Feed/Feed';
 import styles from './User.module.scss';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const User = () => {
-  const profile = 'User';
+  const [user, setUser] = useState({});
+  const { name } = useParams();
+  console.log(name);
+
+  useEffect(() => {
+    // Fetch the current user
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(`/api/users?username=${name}`);
+        setUser(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getUser();
+  }, [name]);
   return (
     <>
       <Header />
@@ -14,25 +32,17 @@ const User = () => {
         <div className={styles.right}>
           <div className={styles.top}>
             <div className={styles.cover}>
-              <img
-                className={styles.coverImg}
-                src="/assets/person/kantCover.png"
-                alt=""
-              />
-              <img
-                className={styles.userImg}
-                src="/assets/person/kant.png"
-                alt=""
-              />
+              <img className={styles.coverImg} src={user.coverImg} alt="" />
+              <img className={styles.userImg} src={user.profileImg} alt="" />
             </div>
             <div className={styles.info}>
-              <h4 className={styles.infoName}>Carlos Casemiro</h4>
-              <span className={styles.infoDesc}>Vamoooooos Real!</span>
+              <h4 className={styles.infoName}>{user.name}</h4>
+              <span className={styles.infoDesc}>{user.desc}</span>
             </div>
           </div>
           <div className={styles.bottom}>
-            <Feed username={'Immanuel Kant'} />
-            <RightBar profile={profile} />
+            <Feed username={user.name} />
+            <RightBar user={user} />
           </div>
         </div>
       </div>

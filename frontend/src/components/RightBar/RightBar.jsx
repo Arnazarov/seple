@@ -1,6 +1,6 @@
 import styles from './RightBar.module.scss';
 
-const RightBar = ({ profile }) => {
+const RightBar = ({ user }) => {
   function HomeRB() {
     return (
       <>
@@ -37,15 +37,15 @@ const RightBar = ({ profile }) => {
         <div className={styles.profileInfo}>
           <div className={styles.item}>
             <span className={styles.itemName}>City: </span>
-            <span className={styles.itemDesc}>Chicago</span>
+            <span className={styles.itemDesc}>{user?.currentCity}</span>
           </div>
           <div className={styles.item}>
             <span className={styles.itemName}>From: </span>
-            <span className={styles.itemDesc}>Gazojak</span>
+            <span className={styles.itemDesc}>{user?.hometown}</span>
           </div>
           <div className={styles.item}>
             <span className={styles.itemName}>Status: </span>
-            <span className={styles.itemDesc}>Single</span>
+            <span className={styles.itemDesc}>Complex</span>
           </div>
         </div>
         <h4 className={styles.profileTitle}>Friends</h4>
@@ -56,7 +56,7 @@ const RightBar = ({ profile }) => {
               alt=""
               className={styles.friendImg}
             />
-            <span className={styles.friendDesc}>Luka Modric</span>
+            <span className={styles.friendDesc}>plato</span>
           </div>
         </div>
       </>
@@ -64,7 +64,7 @@ const RightBar = ({ profile }) => {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.wrapper}>{profile ? <UserRB /> : <HomeRB />}</div>
+      <div className={styles.wrapper}>{user ? <UserRB /> : <HomeRB />}</div>
     </div>
   );
 };

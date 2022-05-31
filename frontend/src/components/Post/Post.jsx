@@ -20,7 +20,7 @@ const Posts = ({ post }) => {
     // Fetch the current user
     const getUser = async () => {
       try {
-        const { data } = await axios.get(`/api/users/${post?.userID}`);
+        const { data } = await axios.get(`/api/users?userID=${post?.userID}`);
         setUser(data);
       } catch (error) {
         console.log(error.message);

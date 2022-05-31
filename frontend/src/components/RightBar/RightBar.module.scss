@@ -84,7 +84,7 @@
     }
 
     .friendsInfo {
-      @include flexCenter(row, space-evenly);
+      @include flexCenter(row, space-between);
       flex-wrap: wrap;
 
       .following {
