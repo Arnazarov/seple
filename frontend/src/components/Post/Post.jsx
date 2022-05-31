@@ -1,8 +1,10 @@
 import styles from './Post.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const Posts = ({ post }) => {
+  const [user, setUser] = useState({});
   const [like, setLike] = useState(1);
   const [liked, setLiked] = useState(false);
 
@@ -10,17 +12,28 @@ const Posts = ({ post }) => {
     setLike(liked ? like - 1 : like + 1);
     setLiked(!liked);
   };
+
+  useEffect(() => {
+    // Fetch the current user
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(`/api/users/${post?.userID}`);
+        setUser(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.topL}>
-            <img
-              src="/assets/person/8.jpeg"
-              alt=""
-              className={styles.profileImg}
-            />
-            <span className={styles.profileName}>Noam Chomsky</span>
+            <img src={user.profileImg} alt="" className={styles.profileImg} />
+            <span className={styles.profileName}>{user.name}</span>
             <span className={styles.profileDate}>1 min ago</span>
           </div>
           <div className={styles.topR}>

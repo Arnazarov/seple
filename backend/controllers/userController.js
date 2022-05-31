@@ -72,9 +72,7 @@ export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findById(id).select(
-      'name email followers following desc currentCity hometown relationship'
-    );
+    const user = await User.findById(id).select('-password');
 
     if (user) {
       res.status(200).json(user);
@@ -211,11 +209,9 @@ export const unfollowUser = async (req, res) => {
         res.status(403).json({ message: 'You are not following this user!' });
       }
     } else {
-      res
-        .status(404)
-        .json({
-          message: 'You are trying to unsubscribe from a non-existent user!',
-        });
+      res.status(404).json({
+        message: 'You are trying to unsubscribe from a non-existent user!',
+      });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
