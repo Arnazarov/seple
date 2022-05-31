@@ -2,13 +2,13 @@ import Post from '../models/postModel.js';
 import User from '../models/userModel.js';
 
 // @desc    Fetch timeline posts
-// @route   GET /api/posts
+// @route   GET /api/posts/timeline/:id
 // @access  Public
 export const fetchPosts = async (req, res) => {
   try {
-    const { userID } = req.body;
+    const { id } = req.params;
 
-    const currUser = await User.findById(userID);
+    const currUser = await User.findById(id);
 
     if (currUser) {
       const currUserPosts = await Post.find({ userID: currUser._id });

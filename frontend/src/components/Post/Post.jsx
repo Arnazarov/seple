@@ -2,7 +2,7 @@ import styles from './Post.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-const Posts = () => {
+const Posts = ({ post }) => {
   const [like, setLike] = useState(1);
   const [liked, setLiked] = useState(false);
 
@@ -28,10 +28,8 @@ const Posts = () => {
           </div>
         </div>
         <div className={styles.center}>
-          <span className={styles.postText}>
-            Real Madrid is the greatest club in history!
-          </span>
-          <img src="/assets/post/8.jpeg" alt="" className={styles.postImg} />
+          <span className={styles.postText}>{post.desc}</span>
+          <img src={post.img} alt="" className={styles.postImg} />
         </div>
         <div className={styles.bottom}>
           <div className={styles.bottomL}>
