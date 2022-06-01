@@ -1,5 +1,6 @@
 import Post from '../models/postModel.js';
 import User from '../models/userModel.js';
+import moment from 'moment';
 
 // @desc    Fetch timeline posts
 // @route   GET /api/posts/timeline/:id
@@ -16,11 +17,19 @@ export const fetchTimelinePosts = async (req, res) => {
         currUser.following.map((id) => Post.find({ userID: id }))
       );
 
-      res.status(200).json(currUserPosts.concat(...followingUsersPosts));
+      const timelinePosts = currUserPosts.concat(...followingUsersPosts);
+      timelinePosts.sort(function (a, b) {
+        const x = moment(a.createdAt);
+        const y = moment(b.createdAt);
+        return y.diff(x);
+      });
+
+      res.status(200).json(timelinePosts);
     } else {
       res.status(400).json({ message: 'User not found!' });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -34,7 +43,9 @@ export const fetchUserPosts = async (req, res) => {
     const currUser = await User.findOne({ name: username });
 
     if (currUser) {
-      const currUserPosts = await Post.find({ userID: currUser._id });
+      const currUserPosts = await Post.find({ userID: currUser._id }).sort({
+        createdAt: 'desc',
+      });
       res.status(200).json(currUserPosts);
     } else {
       res.status(400).json({ message: 'User not found!' });
