@@ -1,6 +1,22 @@
 import styles from './RightBar.module.scss';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const RightBar = ({ user }) => {
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const { data } = await axios.get(`/api/users/friends/${user._id}`);
+        setFriends(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchFriends();
+  }, [user]);
+
   function HomeRB() {
     return (
       <>
@@ -50,14 +66,17 @@ const RightBar = ({ user }) => {
         </div>
         <h4 className={styles.profileTitle}>Friends</h4>
         <div className={styles.friendsInfo}>
-          <div className={styles.following}>
-            <img
-              src="/assets/person/plato.png"
-              alt=""
-              className={styles.friendImg}
-            />
-            <span className={styles.friendDesc}>plato</span>
-          </div>
+          {friends &&
+            friends.map((friend) => (
+              <div key={friend._id} className={styles.following}>
+                <img
+                  src={friend.profileImg}
+                  alt=""
+                  className={styles.friendImg}
+                />
+                <span className={styles.friendDesc}>{friend.name}</span>
+              </div>
+            ))}
         </div>
       </>
     );

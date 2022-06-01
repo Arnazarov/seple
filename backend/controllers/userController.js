@@ -13,6 +13,29 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+// @desc    Fetch friend users
+// @route   GET /api/friends/:id
+// @access  Private
+export const getFriends = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+
+    if (user) {
+      const friends = await Promise.all(
+        user.following.map((userID) =>
+          User.findById(userID).select('_id name profileImg')
+        )
+      );
+      res.status(200).json(friends);
+    } else {
+      res.status(400).json({ message: 'User not found!' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Register a user
 // @route   POST /api/users
 // @access  Public
