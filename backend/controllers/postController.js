@@ -18,7 +18,7 @@ export const fetchTimelinePosts = async (req, res) => {
       );
 
       const timelinePosts = currUserPosts.concat(...followingUsersPosts);
-      timelinePosts.sort(function (a, b) {
+      timelinePosts.sort((a, b) => {
         const x = moment(a.createdAt);
         const y = moment(b.createdAt);
         return y.diff(x);
