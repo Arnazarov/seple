@@ -1,12 +1,41 @@
 import styles from './Login.module.scss';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import {
+  loginError,
+  loginRequest,
+  loginSuccess,
+} from '../../context/AuthActions';
+import axios from 'axios';
 
 const Login = () => {
   const email = useRef();
   const password = useRef();
+
+  const { user, loading, error, dispatch } = useContext(AuthContext);
+
+  const authUser = async (userInfo, dispatch) => {
+    try {
+      dispatch(loginRequest());
+      const { data } = await axios.post('/api/users/login', userInfo);
+
+      dispatch(loginSuccess(data));
+    } catch (error) {
+      dispatch(loginError(error));
+    }
+  };
+
   const loginHandler = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
+
+    const userInfo = {
+      email: email.current.value,
+      password: password.current.value,
+    };
+
+    authUser(userInfo, dispatch);
+
+    console.log(user);
   };
 
   return (

@@ -16,7 +16,7 @@ const AuthReducer = (state, action) => {
       return {
         user: null,
         loading: false,
-        error: true,
+        error: action.payload,
       };
     default:
       break;

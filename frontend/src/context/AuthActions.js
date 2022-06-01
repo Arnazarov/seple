@@ -1,4 +1,4 @@
-export const loginRequest = (userInfo) => ({
+export const loginRequest = () => ({
   type: 'LOGIN_REQUEST',
 });
 
@@ -7,6 +7,7 @@ export const loginSuccess = (user) => ({
   payload: user,
 });
 
-export const loginError = () => ({
+export const loginError = (error) => ({
   type: 'LOGIN_ERROR',
+  payload: error,
 });
