@@ -51,11 +51,13 @@ export const authUser = async (req, res) => {
 
     if (userExists && matchPassword) {
       res.status(200).json({
+        _id: userExists._id,
         name: userExists.name,
         email: userExists.email,
         isAdmin: userExists.isAdmin,
         followers: userExists.followers,
         following: userExists.following,
+        profileImg: userExists.profileImg,
       });
     } else {
       res.status(400).json({ message: 'Invalid username or password' });

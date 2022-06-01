@@ -15,7 +15,7 @@ const Login = () => {
   const email = useRef();
   const password = useRef();
 
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, dispatch } = useContext(AuthContext);
 
   const authUser = async (userInfo, dispatch) => {
     try {

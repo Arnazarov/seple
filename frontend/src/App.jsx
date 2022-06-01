@@ -22,7 +22,11 @@ function App() {
         element={user ? <Navigate to="/" /> : <SignUp />}
         exact
       />
-      <Route path="/profile/:name" element={<User />} exact />
+      <Route
+        path="/profile/:name"
+        element={user ? <User /> : <Login />}
+        exact
+      />
     </Routes>
   );
 }

@@ -2,7 +2,7 @@ import { createContext, useReducer } from 'react';
 import AuthReducer from './AuthReducers';
 
 const INIT_STATE = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')),
   loading: false,
   error: false,
 };

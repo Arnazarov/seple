@@ -7,6 +7,7 @@ const AuthReducer = (state, action) => {
         error: false,
       };
     case 'LOGIN_SUCCESS':
+      localStorage.setItem('user', JSON.stringify(action.payload));
       return {
         user: action.payload,
         loading: false,
@@ -17,6 +18,13 @@ const AuthReducer = (state, action) => {
         user: null,
         loading: false,
         error: action.payload,
+      };
+    case 'LOGOUT':
+      localStorage.removeItem('user');
+      return {
+        user: null,
+        loading: false,
+        error: false,
       };
     default:
       break;
