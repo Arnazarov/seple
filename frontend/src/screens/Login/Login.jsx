@@ -1,6 +1,8 @@
 import styles from './Login.module.scss';
 import { useContext, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import CircularProgress from '@mui/material/CircularProgress';
+import Message from '../../components/Message/Message';
 import {
   loginError,
   loginRequest,
@@ -34,8 +36,6 @@ const Login = () => {
     };
 
     authUser(userInfo, dispatch);
-
-    console.log(user);
   };
 
   return (
@@ -63,9 +63,22 @@ const Login = () => {
               type="password"
               placeholder="Enter your password"
             />
-            <button className={styles.btnLog}>Sign In</button>
+            <button className={styles.btnLog} type="submit" disabled={loading}>
+              {loading ? (
+                <CircularProgress color="inherit" size="25px" />
+              ) : (
+                'Sign In'
+              )}
+            </button>
+
             <span className={styles.msg}>Forgot Password? Sign Up here.</span>
             <button className={styles.btnReg}>Sign Up</button>
+            {error && (
+              <Message
+                msg={'Something went wrong! Try again.'}
+                severity={'error'}
+              />
+            )}
           </form>
         </div>
       </div>

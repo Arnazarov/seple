@@ -32,12 +32,12 @@
     }
 
     .right {
-      flex: 2;
+      flex: 3;
       @include flexCustom(column, flex-start, center);
 
       .login {
         @include flexCustom(column, space-evenly, stretch);
-        height: 300px;
+        height: auto;
         width: 400px;
         padding: 20px 30px;
         background-color: #fff;
@@ -54,6 +54,7 @@
           border: 0.7px solid #5189ba;
           font-size: 15px;
           padding-left: 20px;
+          margin-bottom: 10px;
 
           &:focus {
             outline: none;
@@ -72,10 +73,14 @@
           color: white;
           font-size: 20px;
           font-weight: 500;
+          margin-bottom: 10px;
           cursor: pointer;
           &:hover {
             background-color: #a2d2ff;
             color: #035397;
+          }
+          &:disabled {
+            cursor: not-allowed;
           }
         }
 
@@ -83,6 +88,7 @@
           font-size: 14px;
           font-weight: 500;
           color: #035397;
+          margin-bottom: 10px;
         }
 
         .btnReg {
@@ -94,6 +100,7 @@
           color: white;
           font-size: 20px;
           font-weight: 500;
+          margin-bottom: 10px;
           cursor: pointer;
           &:hover {
             background-color: #b4e197;
