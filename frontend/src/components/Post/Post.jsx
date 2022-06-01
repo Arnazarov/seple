@@ -1,23 +1,26 @@
 import styles from './Post.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import { AuthContext } from '../../context/AuthContext';
 
 const Posts = ({ post }) => {
   const [user, setUser] = useState({});
-  const [like, setLike] = useState(100);
+  const [like, setLike] = useState(post?.likes.length);
   const [liked, setLiked] = useState(false);
 
-  const likeBtnHandler = (e) => {
-    setLike(liked ? like - 1 : like + 1);
-    setLiked(!liked);
-  };
+  const { user: loggedUser } = useContext(AuthContext);
+
+  // Update component state 'liked' when post.likes changes
+  useEffect(() => {
+    setLiked(post.likes.includes(loggedUser._id));
+  }, [loggedUser._id, post.likes]);
 
   useEffect(() => {
-    // Fetch the current user
+    // Fetch the user who created this post
     const getUser = async () => {
       try {
         const { data } = await axios.get(`/api/users?userID=${post?.userID}`);
@@ -28,6 +31,18 @@ const Posts = ({ post }) => {
     };
     getUser();
   }, [post.userID]);
+
+  const likeBtnHandler = async (e) => {
+    try {
+      await axios.put(`/api/posts/${post._id}/like`, {
+        userID: loggedUser._id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setLike(liked ? like - 1 : like + 1);
+    setLiked(!liked);
+  };
 
   return (
     <div className={styles.container}>

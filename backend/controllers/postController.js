@@ -131,7 +131,7 @@ export const deletePost = async (req, res) => {
 };
 
 // @desc    Like/Unlike a post
-// @route   PUT /api/post/:id/like
+// @route   PUT /api/posts/:id/like
 // @access  Private
 export const likePost = async (req, res) => {
   try {
@@ -144,7 +144,7 @@ export const likePost = async (req, res) => {
     if (post) {
       if (post.likes.includes(userID)) {
         await post.updateOne({ $pull: { likes: userID } });
-        res.status(400).json({ message: 'You have disliked this post!' });
+        res.status(200).json({ message: 'You have disliked this post!' });
       } else {
         await post.updateOne({ $push: { likes: userID } });
         res.status(200).json({ message: 'You have liked this post!' });
