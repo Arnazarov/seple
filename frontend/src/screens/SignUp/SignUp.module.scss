@@ -9,8 +9,10 @@
   .wrapper {
     width: 70%;
     height: 70%;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 
     .left {
       flex: 1;
@@ -56,6 +58,7 @@
           border: 0.7px solid #5189ba;
           font-size: 15px;
           padding-left: 20px;
+          margin-bottom: 10px;
 
           &:focus {
             outline: none;
@@ -68,6 +71,7 @@
 
         .btnLog {
           height: 50px;
+          width: 100%;
           border-radius: 10px;
           border: 1px solid #a2d2ff;
           background-color: #4d96ff;
@@ -75,6 +79,7 @@
           font-size: 20px;
           font-weight: 500;
           cursor: pointer;
+          margin-bottom: 10px;
           &:hover {
             background-color: #a2d2ff;
             color: #035397;
@@ -85,6 +90,7 @@
           font-size: 14px;
           font-weight: 500;
           color: #035397;
+          margin-bottom: 10px;
         }
 
         .btnReg {
@@ -97,6 +103,7 @@
           font-size: 20px;
           font-weight: 500;
           cursor: pointer;
+          margin-bottom: 10px;
           &:hover {
             background-color: #b4e197;
             color: #5eaf4a;

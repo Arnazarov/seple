@@ -9,6 +9,7 @@ import {
   loginSuccess,
 } from '../../context/AuthActions';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const email = useRef();
@@ -72,7 +73,9 @@ const Login = () => {
             </button>
 
             <span className={styles.msg}>Forgot Password? Sign Up here.</span>
-            <button className={styles.btnReg}>Sign Up</button>
+            <Link to="/signup">
+              <button className={styles.btnReg}>Sign Up</button>
+            </Link>
             {error && (
               <Message
                 msg={'Something went wrong! Try again.'}
