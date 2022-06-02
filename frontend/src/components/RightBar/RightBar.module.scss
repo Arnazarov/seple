@@ -87,17 +87,24 @@
       @include flexCenter(row, space-between);
       flex-wrap: wrap;
 
-      .following {
-        @include flexCenter(column, flex-start);
-        margin-bottom: 15px;
+      .friendLink {
+        text-decoration: none;
 
-        .friendImg {
-          width: 100px;
-          height: 100px;
-          border-radius: 5px;
-          object-fit: cover;
-        }
-        .friendDesc {
+        .following {
+          @include flexCenter(column, flex-start);
+          margin-bottom: 15px;
+
+          .friendImg {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-bottom: 5px;
+          }
+          .friendDesc {
+            color: #035397;
+            font-weight: 500;
+          }
         }
       }
     }

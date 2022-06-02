@@ -28,6 +28,9 @@
 
     .info {
       @include flexCenter(column, center);
+      text-align: center;
+      padding: 0 50px;
+
       .infoName {
         font-family: $Lobster;
         letter-spacing: 1px;
@@ -37,6 +40,7 @@
       }
       .infoDesc {
         font-weight: 300;
+        font-style: italic;
       }
     }
   }

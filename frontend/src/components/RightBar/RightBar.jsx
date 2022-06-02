@@ -1,6 +1,7 @@
 import styles from './RightBar.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const RightBar = ({ user }) => {
   const [friends, setFriends] = useState([]);
@@ -68,14 +69,19 @@ const RightBar = ({ user }) => {
         <div className={styles.friendsInfo}>
           {friends &&
             friends.map((friend) => (
-              <div key={friend._id} className={styles.following}>
-                <img
-                  src={friend.profileImg}
-                  alt=""
-                  className={styles.friendImg}
-                />
-                <span className={styles.friendDesc}>{friend.name}</span>
-              </div>
+              <Link
+                to={`/profile/${friend.name}`}
+                className={styles.friendLink}
+              >
+                <div key={friend._id} className={styles.following}>
+                  <img
+                    src={friend.profileImg}
+                    alt=""
+                    className={styles.friendImg}
+                  />
+                  <span className={styles.friendDesc}>{friend.name}</span>
+                </div>
+              </Link>
             ))}
         </div>
       </>
