@@ -14,6 +14,7 @@ $Tiro: 'Tiro Devanagari Sanskrit', serif;
 $dark: rgb(29, 29, 29);
 $light: #fff;
 $primary: #1877f2;
+$secondary: #035397;
 // Size
 $size-sm: 12px;
 $size-md: 16px;
@@ -55,7 +56,18 @@ $size-lg: 24px;
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-* {
-  font-family: $Raleway;
-  margin: 0;
+@mixin scrollBar {
+  &::-webkit-scrollbar {
+    width: 5px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgb(193, 196, 197);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
 }

@@ -1,0 +1,22 @@
+@import '../../index.scss';
+
+.container {
+  @include flexCustom(row, start, center);
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    border-radius: 5px;
+    background-color: #d4ebff;
+  }
+
+  .img {
+    @include imageContainer(40, 40);
+    margin-right: 20px;
+
+    .name {
+      font-weight: 500;
+    }
+  }
+}

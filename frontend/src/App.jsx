@@ -5,6 +5,7 @@ import User from './screens/User/User';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import Messenger from './screens/Messenger/Messenger';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,8 @@ function App() {
         element={user ? <User /> : <Login />}
         exact
       />
+
+      <Route path="/chat" element={user ? <Messenger /> : <Login />} exact />
     </Routes>
   );
 }

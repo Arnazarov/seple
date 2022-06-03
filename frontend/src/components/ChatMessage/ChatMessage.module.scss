@@ -1,0 +1,38 @@
+@import '../../index.scss';
+.container {
+  @include flexCustom(column, flex-start, start);
+  margin-top: 20px;
+
+  .top {
+    display: flex;
+
+    .img {
+      @include imageContainer(32, 32);
+      margin-right: 10px;
+    }
+
+    .text {
+      padding: 8px;
+      border-radius: 15px;
+      background-color: #4286f4;
+      color: white;
+      font-size: 14px;
+      max-width: 300px;
+    }
+  }
+
+  .bottom {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
+
+.self {
+  align-items: flex-end;
+
+  .top {
+    .text {
+      background-color: #9da9b3;
+    }
+  }
+}
