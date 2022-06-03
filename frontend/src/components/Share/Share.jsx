@@ -1,14 +1,10 @@
 import styles from './Share.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPhotoFilm,
-  faTags,
-  faLocationDot,
-  faFaceGrinStars,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPhotoFilm, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext, useRef, useState } from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 const Share = () => {
   const { user } = useContext(AuthContext);
@@ -47,11 +43,27 @@ const Share = () => {
           />
           <input
             className={styles.input}
-            placeholder="Express your thoughts... "
+            placeholder="Express your thoughts in a philosphical manner... "
             ref={desc}
           />
         </div>
         <hr className={styles.line} />
+        {file && (
+          <div className={styles.imgContainer}>
+            <img
+              src={URL.createObjectURL(file)}
+              alt=""
+              className={styles.img}
+            />
+            <FontAwesomeIcon
+              icon={faSquareXmark}
+              className={styles.imgIcon}
+              onClick={() => {
+                setFile(null);
+              }}
+            />
+          </div>
+        )}
         <form
           className={styles.bottom}
           onSubmit={postSubmitHandler}
@@ -65,7 +77,7 @@ const Share = () => {
                 icon={faPhotoFilm}
                 className={styles.icon}
               />
-              <span className={styles.shareText}>Media</span>
+              <span className={styles.shareText}>Add Photo</span>
               <input
                 style={{ display: 'none' }}
                 name="image"
@@ -75,34 +87,15 @@ const Share = () => {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
-            <div className={styles.share}>
-              <FontAwesomeIcon
-                style={{ color: 'coral' }}
-                icon={faTags}
-                className={styles.icon}
-              />
-              <span className={styles.faTags}>Tag</span>
-            </div>
-            <div className={styles.share}>
-              <FontAwesomeIcon
-                style={{ color: 'chartreuse' }}
-                icon={faLocationDot}
-                className={styles.icon}
-              />
-              <span className={styles.shareText}>Location</span>
-            </div>
-            <div className={styles.share}>
-              <FontAwesomeIcon
-                style={{ color: 'gold' }}
-                icon={faFaceGrinStars}
-                className={styles.icon}
-              />
-              <span className={styles.shareText}>Feelings</span>
-            </div>
           </div>
-          <button className={styles.btn} type="submit">
+          <Button
+            variant="contained"
+            className={styles.btn}
+            type="submit"
+            size="small"
+          >
             Share
-          </button>
+          </Button>
         </form>
       </div>
     </div>
