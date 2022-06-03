@@ -9,8 +9,39 @@ import {
   faCalendarDay,
   faCircleQuestion,
 } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const LeftBar = () => {
+  const [users, setUsers] = useState([]);
+
+  const sortByNames = (users) => {
+    return users.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      return 0;
+    });
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const { data } = await axios.get('/api/users/all');
+        setUsers(sortByNames(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -49,14 +80,17 @@ const LeftBar = () => {
         <hr className={styles.line}></hr>
         <h4 className={styles.title}>All Friends</h4>
         <ul className={styles.friendList}>
-          <li className={styles.friend}>
-            <img
-              className={styles.friendImg}
-              alt=""
-              src="/assets/person/plato.png"
-            />
-            <span className={styles.friendName}>Omar Hayyam</span>
-          </li>
+          {users &&
+            users.map((user) => (
+              <li key={user._id} className={styles.friend}>
+                <img
+                  className={styles.friendImg}
+                  alt=""
+                  src={user.profileImg}
+                />
+                <span className={styles.friendName}>{user.name}</span>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

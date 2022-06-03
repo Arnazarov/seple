@@ -13,7 +13,9 @@ import {
 
 const router = express.Router();
 
-router.route('/').get(getUserById).get(getAllUsers).post(registerUser);
+router.route('/').get(getUserById).post(registerUser);
+
+router.route('/all').get(getAllUsers);
 
 router.route('/login').post(authUser);
 

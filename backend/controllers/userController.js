@@ -2,7 +2,7 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 
 // @desc    Fetch all users
-// @route   GET /api/users
+// @route   GET /api/users/all
 // @access  Public
 export const getAllUsers = async (req, res) => {
   try {
