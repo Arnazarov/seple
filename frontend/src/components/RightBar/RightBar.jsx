@@ -38,6 +38,17 @@ const RightBar = ({ user }) => {
               <img
                 className={styles.profileImg}
                 alt=""
+                src="/assets/person/aristotle.png"
+              />
+              <span className={styles.online}></span>
+            </div>
+            <span className={styles.name}>Aristotle</span>
+          </li>
+          <li className={styles.friend}>
+            <div className={styles.imgContainer}>
+              <img
+                className={styles.profileImg}
+                alt=""
                 src="/assets/person/plato.png"
               />
               <span className={styles.online}></span>

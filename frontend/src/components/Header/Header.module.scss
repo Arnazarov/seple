@@ -86,12 +86,14 @@
     }
     .linkExit {
       text-decoration: none;
+
       .iconExit {
+        font-size: 16px;
         color: white;
 
         .iconExitText {
           margin-left: 5px;
-          font-size: 16px;
+          font-size: 14px;
         }
       }
     }

@@ -56,7 +56,7 @@ export default function Topbar() {
         <Link to="/login" className={styles.linkExit} onClick={logoutHandler}>
           <div className={styles.iconExit}>
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span className={styles.iconExitText}>Logout</span>
+            <span className={styles.iconExitText}>Sign out</span>
           </div>
         </Link>
         <Link to={`/profile/${user?.name}`}>
