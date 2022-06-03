@@ -1,6 +1,6 @@
 @import '../../index.scss';
 .container {
-  @include flexCustom(column, flex-start, start);
+  @include flexCustom(column, flex-start, flex-start);
   margin-top: 20px;
 
   .top {

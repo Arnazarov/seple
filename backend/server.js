@@ -8,6 +8,8 @@ import mongoConnect from './config/mongodb.js';
 import userRoutes from './routes/userRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import talkRoutes from './routes/talkRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 
 // Configure environment variables
 dotenv.config();
@@ -26,6 +28,8 @@ app.use(morgan('dev'));
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/talk', talkRoutes);
+app.use('/api/message', messageRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
