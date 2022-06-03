@@ -62,17 +62,19 @@
       padding: 0;
       margin: 0;
       list-style: none;
+      text-decoration: none;
 
-      .friend {
-        @include flexCenter(row, flex-start);
-        margin-bottom: 10px;
+      .friendLink {
+        text-decoration: none;
+        color: #373b44;
+        .friend {
+          @include flexCenter(row, flex-start);
+          margin-bottom: 10px;
 
-        .friendImg {
-          @include imageContainer(32, 32);
-          margin-right: 10px;
-        }
-
-        .friendName {
+          .friendImg {
+            @include imageContainer(32, 32);
+            margin-right: 10px;
+          }
         }
       }
     }

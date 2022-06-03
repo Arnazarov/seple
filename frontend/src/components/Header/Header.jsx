@@ -24,7 +24,7 @@ export default function Topbar() {
     <div className={styles.container}>
       <div className={styles.left}>
         <Link to="/" className={styles.link}>
-          <span className={styles.logo}>Seple</span>
+          <span className={styles.logo}>Metamorphosis</span>
         </Link>
       </div>
       <div className={styles.center}>

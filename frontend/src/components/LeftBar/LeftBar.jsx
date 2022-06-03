@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const LeftBar = () => {
   const [users, setUsers] = useState([]);
@@ -82,14 +83,20 @@ const LeftBar = () => {
         <ul className={styles.friendList}>
           {users &&
             users.map((user) => (
-              <li key={user._id} className={styles.friend}>
-                <img
-                  className={styles.friendImg}
-                  alt=""
-                  src={user.profileImg}
-                />
-                <span className={styles.friendName}>{user.name}</span>
-              </li>
+              <Link
+                key={user._id}
+                to={`/profile/${user.name}`}
+                className={styles.friendLink}
+              >
+                <li className={styles.friend}>
+                  <img
+                    className={styles.friendImg}
+                    alt=""
+                    src={user.profileImg}
+                  />
+                  <span className={styles.friendName}>{user.name}</span>
+                </li>
+              </Link>
             ))}
         </ul>
       </div>

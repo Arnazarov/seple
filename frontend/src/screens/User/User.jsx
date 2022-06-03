@@ -13,11 +13,13 @@ import { AuthContext } from '../../context/AuthContext';
 import { follow, unfollow } from '../../context/AuthActions';
 
 const User = () => {
+  const { user: loggedUser, dispatch } = useContext(AuthContext);
+
   const [user, setUser] = useState(null);
   const { name } = useParams();
-  const [following, setFollowing] = useState(false);
-
-  const { user: loggedUser, dispatch } = useContext(AuthContext);
+  const [following, setFollowing] = useState(
+    loggedUser.following.includes(user?._id)
+  );
 
   useEffect(() => {
     setFollowing(loggedUser.following.includes(user?._id));
