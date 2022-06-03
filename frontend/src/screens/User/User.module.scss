@@ -42,9 +42,20 @@
         font-weight: 300;
         font-style: italic;
       }
+
+      .btnFollow {
+        margin-top: 10px;
+        color: #1a237e;
+
+        .iconFollow {
+          margin-right: 5px;
+          font-size: 16px;
+        }
+      }
     }
   }
   .bottom {
     display: flex;
+    margin-top: 15px;
   }
 }

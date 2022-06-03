@@ -7,15 +7,17 @@ const RightBar = ({ user }) => {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    const fetchFriends = async () => {
-      try {
-        const { data } = await axios.get(`/api/users/friends/${user._id}`);
-        setFriends(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchFriends();
+    if (user) {
+      const fetchFriends = async () => {
+        try {
+          const { data } = await axios.get(`/api/users/friends/${user._id}`);
+          setFriends(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchFriends();
+    }
   }, [user]);
 
   function HomeRB() {
@@ -70,6 +72,7 @@ const RightBar = ({ user }) => {
           {friends &&
             friends.map((friend) => (
               <Link
+                key={friend._id}
                 to={`/profile/${friend.name}`}
                 className={styles.friendLink}
               >

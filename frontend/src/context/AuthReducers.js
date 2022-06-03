@@ -26,6 +26,30 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: false,
       };
+    case 'FOLLOW':
+      const user = JSON.parse(localStorage.getItem('user'));
+      user['following'].push(action.payload.toString());
+      localStorage.setItem('user', JSON.stringify(user));
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: [...state.user.following, action.payload],
+        },
+      };
+    case 'UNFOLLOW':
+      const userLS = JSON.parse(localStorage.getItem('user'));
+      userLS.following = userLS.following.filter((id) => id !== action.payload);
+      localStorage.setItem('user', JSON.stringify(userLS));
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: state.user.following.filter((id) => id !== action.payload),
+        },
+      };
     default:
       break;
   }
