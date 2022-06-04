@@ -4,12 +4,17 @@ import ChatTalk from '../../components/ChatTalk/ChatTalk';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 import { TextareaAutosize, Button, Input } from '@mui/material';
 import ChatOnline from '../../components/ChatOnline/ChatOnline';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 
 const Messenger = () => {
   const [talks, setTalks] = useState([]);
+  const [chat, setChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [liveMessage, setLiveMessage] = useState('');
+
+  const chatScroll = useRef();
 
   const { user } = useContext(AuthContext);
 
@@ -26,6 +31,41 @@ const Messenger = () => {
     fetchTalks();
   }, [user]);
 
+  useEffect(() => {
+    if (chat) {
+      const fetchMessages = async () => {
+        try {
+          const { data } = await axios.get(`/api/message/${chat?._id}`);
+          setMessages(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchMessages();
+    }
+  }, [chat]);
+
+  useEffect(() => {
+    chatScroll.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const sendBtnHandler = async (e) => {
+    e.preventDefault();
+    const msg = {
+      senderID: user._id,
+      talkID: chat._id,
+      message: liveMessage,
+    };
+
+    try {
+      const { data } = await axios.post(`/api/message`, msg);
+      setMessages([...messages, data]);
+      setLiveMessage('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -35,28 +75,52 @@ const Messenger = () => {
             <Input className={styles.input} placeholder="Search friends..." />
             {talks &&
               talks.map((talk) => (
-                <ChatTalk key={talk._id} talk={talk} user={user} />
+                <div key={talk._id} onClick={() => setChat(talk)}>
+                  <ChatTalk talk={talk} user={user} />
+                </div>
               ))}
           </div>
         </div>
         <div className={styles.center}>
-          <div className={styles.wrapper}>
-            <div className={styles.top}>
-              <ChatMessage />
+          {chat ? (
+            <div className={styles.wrapper}>
+              <div className={styles.top}>
+                {messages &&
+                  messages.map((msg) => (
+                    <div ref={chatScroll} key={msg._id}>
+                      <ChatMessage
+                        message={msg}
+                        self={msg.senderID === user._id}
+                      />
+                    </div>
+                  ))}
+              </div>
+              <div className={styles.bottom}>
+                <TextareaAutosize
+                  maxRows={3}
+                  className={styles.textArea}
+                  onChange={(e) => setLiveMessage(e.target.value)}
+                  value={liveMessage}
+                />
+                <Button
+                  variant="contained"
+                  className={styles.btn}
+                  type="submit"
+                  size="small"
+                  color="success"
+                  onClick={sendBtnHandler}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
-            <div className={styles.bottom}>
-              <TextareaAutosize maxRows={3} className={styles.textArea} />
-              <Button
-                variant="contained"
-                className={styles.btn}
-                type="submit"
-                size="small"
-                color="success"
-              >
-                Send
-              </Button>
+          ) : (
+            <div className={styles.wrapper}>
+              <div className={styles.chatBg}>
+                Open a chat to start messaging.
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className={styles.right}>
           <div className={styles.wrapper}>

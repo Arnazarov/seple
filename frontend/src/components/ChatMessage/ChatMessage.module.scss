@@ -11,6 +11,10 @@
       margin-right: 10px;
     }
 
+    .imgSelf {
+      display: none;
+    }
+
     .text {
       padding: 8px;
       border-radius: 15px;
@@ -31,8 +35,18 @@
   align-items: flex-end;
 
   .top {
+    .img {
+      display: none;
+    }
+
     .text {
       background-color: #9da9b3;
+    }
+
+    .imgSelf {
+      display: flex;
+      @include imageContainer(32, 32);
+      margin-left: 10px;
     }
   }
 }
