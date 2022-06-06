@@ -14,9 +14,38 @@
   .img {
     @include imageContainer(40, 40);
     margin-right: 20px;
+  }
+  .name {
+    font-weight: 500;
+  }
+}
 
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 8px 0;
+
+    .img {
+      @include imageContainer(35, 35);
+      margin-right: 10px;
+    }
     .name {
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container {
+    padding: 7px 0;
+
+    .img {
+      @include imageContainer(30, 30);
+      margin-right: 10px;
+    }
+    .name {
+      font-size: 12px;
+      font-weight: 400;
     }
   }
 }

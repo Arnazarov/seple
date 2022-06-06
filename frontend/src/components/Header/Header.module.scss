@@ -55,55 +55,136 @@
 
   .right {
     flex: 3;
-    @include flexCenter(row, space-around);
-    color: $light;
 
     .icons {
       display: flex;
+      @include flexCenter(row, space-evenly);
 
-      .iconItem {
-        margin-right: 15px;
-        cursor: pointer;
-        position: relative;
-        .icon {
-          height: 15px !important;
-          width: 18px !important;
-        }
+      .link {
+        text-decoration: none;
+        text-align: center;
+        color: $light;
 
-        .iconBadge {
-          @include flexCenter(row, center);
-          width: 15px;
-          height: 15px;
-          background-color: red;
-          border-radius: 50%;
-          color: white;
-          position: absolute;
-          top: -5px;
-          right: -5px;
-          font-size: 12px;
-        }
-      }
-    }
-    .linkExit {
-      text-decoration: none;
+        .iconItem {
+          margin-right: 15px;
+          cursor: pointer;
+          position: relative;
+          text-align: center;
 
-      .iconExit {
-        font-size: 16px;
-        color: white;
+          .icon {
+            height: 15px !important;
+            width: 18px !important;
+          }
 
-        .iconExitText {
-          margin-left: 5px;
-          font-size: 14px;
+          .iconText {
+            font-size: 12px;
+          }
+
+          .iconBadge {
+            @include flexCenter(row, center);
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            border-radius: 50%;
+            color: white;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 12px;
+          }
         }
       }
     }
 
     .topbarImg {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
+      @include imageContainer(32, 32);
       cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    .left {
+      flex: 3;
+
+      .link {
+        text-decoration: none;
+        .logo {
+          font-size: 20px;
+          margin-left: 10px;
+          font-weight: 500;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .center {
+      flex: 5;
+      .searchBar {
+        width: 90%;
+        height: 25px;
+
+        .searchIcon {
+          font-size: 10px !important;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .right {
+      flex: 4;
+      .icons {
+        display: flex;
+        @include flexCenter(row, space-evenly);
+        .link {
+          .iconItem {
+            margin-right: 12px;
+
+            .icon {
+              height: 13px !important;
+              width: 15px !important;
+            }
+
+            .iconText {
+              font-size: 11px;
+            }
+
+            .iconBadge {
+              width: 12px;
+              height: 12px;
+              font-size: 10px;
+              top: -2px;
+              right: -2px;
+            }
+          }
+        }
+      }
+      .topbarImg {
+        @include imageContainer(28, 28);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .container {
+    .left {
+      flex: 8;
+
+      .link {
+        .logo {
+          font-size: 32px;
+          margin-left: 30px;
+          font-weight: 500;
+          letter-spacing: 2px;
+        }
+      }
+    }
+
+    .center {
+      display: none;
     }
   }
 }

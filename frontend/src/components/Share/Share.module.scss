@@ -78,3 +78,58 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    .wrapper {
+      padding: 20px;
+
+      .top {
+        .profileImg {
+          @include imageContainer(40, 40);
+        }
+
+        .input {
+          font-size: 13px;
+          font-family: $Mali;
+        }
+      }
+
+      .bottom .options .share .shareText {
+        font-size: 13px;
+      }
+
+      .bottom .btn {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container {
+    .wrapper {
+      padding: 20px;
+
+      .top {
+        .profileImg {
+          @include imageContainer(30, 30);
+        }
+
+        .input {
+          font-size: 12px;
+          font-family: $Raleway;
+        }
+      }
+
+      .bottom .options .share .shareText {
+        font-size: 12px;
+      }
+
+      .bottom .btn {
+        font-size: 10px;
+        padding: 2px 0;
+      }
+    }
+  }
+}

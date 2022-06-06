@@ -1,10 +1,8 @@
 import styles from './Header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faUser,
   faMessage,
   faMagnifyingGlass,
-  faBell,
   faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -40,32 +38,32 @@ export default function Topbar() {
       </div>
       <div className={styles.right}>
         <div className={styles.icons}>
-          <div className={styles.iconItem}>
-            <FontAwesomeIcon icon={faUser} className={styles.icon} />
-            <span className={styles.iconBadge}>1</span>
-          </div>
-          <div className={styles.iconItem}>
-            <FontAwesomeIcon icon={faMessage} className={styles.icon} />
-            <span className={styles.iconBadge}>2</span>
-          </div>
-          <div className={styles.iconItem}>
-            <FontAwesomeIcon icon={faBell} className={styles.icon} />
-            <span className={styles.iconBadge}>1</span>
-          </div>
+          <Link to="/chat" className={styles.link}>
+            <div className={styles.iconItem}>
+              <FontAwesomeIcon icon={faMessage} className={styles.icon} />
+              <span className={styles.iconBadge}>2</span>
+              <p className={styles.iconText}>Chat</p>
+            </div>
+          </Link>
+
+          <Link to="/login" className={styles.link} onClick={logoutHandler}>
+            <div className={styles.iconItem}>
+              <FontAwesomeIcon
+                icon={faArrowRightFromBracket}
+                className={styles.icon}
+              />
+              <p className={styles.iconText}>Sign out</p>
+            </div>
+          </Link>
+
+          <Link to={`/profile/${user?.name}`}>
+            <img
+              src={user ? user.profileImg : '/assets/person/noAvatar.png'}
+              alt=""
+              className={styles.topbarImg}
+            />
+          </Link>
         </div>
-        <Link to="/login" className={styles.linkExit} onClick={logoutHandler}>
-          <div className={styles.iconExit}>
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span className={styles.iconExitText}>Sign out</span>
-          </div>
-        </Link>
-        <Link to={`/profile/${user?.name}`}>
-          <img
-            src={user ? user.profileImg : '/assets/person/noAvatar.png'}
-            alt=""
-            className={styles.topbarImg}
-          />
-        </Link>
       </div>
     </div>
   );

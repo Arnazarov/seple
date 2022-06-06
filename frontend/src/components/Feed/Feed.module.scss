@@ -5,3 +5,15 @@
     padding: 0 15px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex: 9;
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container .wrapper {
+    padding: 0 10px;
+  }
+}

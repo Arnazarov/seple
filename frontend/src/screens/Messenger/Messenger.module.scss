@@ -77,3 +77,41 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .left {
+    flex: 1;
+
+    .input {
+      display: none;
+    }
+  }
+
+  .center {
+    flex: 10px;
+  }
+
+  .right {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .left {
+    flex: 1;
+
+    .wrapper {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .center {
+    flex: 11;
+  }
+
+  .right {
+    flex: 0;
+    display: none;
+  }
+}

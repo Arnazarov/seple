@@ -9,7 +9,6 @@ import Messenger from './screens/Messenger/Messenger';
 
 function App() {
   const { user } = useContext(AuthContext);
-
   return (
     <Routes>
       <Route path="/" element={user ? <Home /> : <SignUp />} exact />
@@ -29,7 +28,11 @@ function App() {
         exact
       />
 
-      <Route path="/chat" element={user ? <Messenger /> : <Login />} exact />
+      <Route
+        path="/chat"
+        element={user ? <Messenger /> : <Navigate to="/" />}
+        exact
+      />
     </Routes>
   );
 }

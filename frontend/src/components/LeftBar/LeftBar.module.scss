@@ -80,3 +80,71 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex: 3;
+    font-size: 14px;
+
+    .wrapper {
+      padding: 10px;
+
+      .list {
+        .listItem {
+          margin-bottom: 14px;
+
+          .icon {
+            margin-right: 15px;
+          }
+
+          .listText {
+            font-weight: 300;
+          }
+        }
+      }
+
+      .btn {
+        width: auto;
+      }
+
+      .title {
+        font-size: 14px;
+      }
+
+      .friendList .friendLink .friend .friendName {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container {
+    flex: 3;
+    font-size: 14px;
+
+    .wrapper {
+      padding: 10px;
+
+      .list,
+      .btn,
+      .line {
+        display: none;
+      }
+
+      .title {
+        font-size: 13px;
+      }
+
+      .friendList .friendLink .friend {
+        .friendImg {
+          @include imageContainer(20, 20);
+          margin-right: 5px;
+        }
+        .friendName {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

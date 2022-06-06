@@ -78,3 +78,96 @@
     }
   }
 }
+
+@media screen and (max-width: 660px) {
+  .container {
+    .wrapper {
+      padding: 5px;
+
+      .top {
+        .topL {
+          .profileImg {
+            @include imageContainer(32, 32);
+          }
+          .profileName {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 10px 0 5px;
+          }
+          .profileDate {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .center {
+        margin: 10px 0;
+        padding: 0 10px;
+
+        .postText {
+          font-size: 14px;
+        }
+
+        .postImg {
+          margin-top: 7px;
+        }
+      }
+
+      .bottom {
+        font-size: 12px;
+        padding: 3px 5px;
+        .bottomL {
+          .icon {
+            width: 15px;
+            height: 15px;
+          }
+
+          .likeCounter {
+            letter-spacing: 0;
+          }
+        }
+
+        .bottomR .comment {
+          letter-spacing: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .container {
+    .wrapper {
+      padding: 5px;
+
+      .top {
+        .topL {
+          .profileImg {
+            @include imageContainer(22, 22);
+            margin-left: 5px;
+          }
+          .profileName {
+            font-size: 13px;
+          }
+          .profileDate {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .center .postText {
+        font-size: 13px;
+      }
+
+      .bottom .bottomL {
+        .likeCounter {
+          font-size: 10px;
+        }
+      }
+
+      .bottomR .comment {
+        font-size: 10px;
+      }
+    }
+  }
+}

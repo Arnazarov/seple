@@ -112,3 +112,31 @@
     }
   }
 }
+
+@media screen and (max-width: 560px) {
+  .container .wrapper {
+    height: 70%;
+
+    .left {
+      .logo {
+        font-size: 35px;
+      }
+      .desc {
+        font-size: 20px;
+      }
+    }
+
+    .right .login {
+      width: auto;
+
+      .input {
+        font-size: 14px;
+      }
+
+      .btnReg,
+      .btnLog {
+        font-size: 15px;
+      }
+    }
+  }
+}

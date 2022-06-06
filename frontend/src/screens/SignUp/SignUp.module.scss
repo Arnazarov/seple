@@ -49,9 +49,6 @@
         -webkit-box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.84);
         box-shadow: 0px 0px 17px -8px rgba(0, 0, 0, 0.84);
 
-        @media screen and (max-width: 470px) {
-          width: auto;
-        }
         .input {
           height: 50px;
           border-radius: 5px;
@@ -109,6 +106,34 @@
             color: #5eaf4a;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .container .wrapper {
+    height: 90%;
+
+    .left {
+      .logo {
+        font-size: 35px;
+      }
+      .desc {
+        font-size: 20px;
+      }
+    }
+
+    .right .login {
+      width: auto;
+
+      .input {
+        font-size: 14px;
+      }
+
+      .btnReg,
+      .btnLog {
+        font-size: 15px;
       }
     }
   }
