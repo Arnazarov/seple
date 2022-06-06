@@ -38,4 +38,25 @@ const fetchTalkByUserId = async (req, res) => {
   }
 };
 
-export { createTalk, fetchTalkByUserId };
+// @desc    Fetch a conversation by user ids
+// @route   GET /api/talk/find/:fid/:sid
+// @access  Private
+const fetchTalkByUsersId = async (req, res) => {
+  try {
+    const { fid, sid } = req.params;
+
+    const talk = await Talk.findOne({
+      members: { $all: [fid, sid] },
+    });
+
+    if (talk) {
+      res.status(200).json(talk);
+    } else {
+      res.status(400).json({ message: 'Conversation not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
+export { createTalk, fetchTalkByUserId, fetchTalkByUsersId };

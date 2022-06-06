@@ -10,6 +10,7 @@ import postRoutes from './routes/postRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import talkRoutes from './routes/talkRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
+import { Server } from 'socket.io';
 
 // Configure environment variables
 dotenv.config();
@@ -35,4 +36,41 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.listen(8000, () => {
   console.log('Server is running on port 8000'.yellow.bold);
+});
+
+let users = [];
+
+const addUser = (userID, socketID) => {
+  !users.some((user) => user.userID === userID) &&
+    users.push({ userID, socketID });
+};
+
+const removeUser = (socketID) => {
+  users = users.filter((user) => user.socketID !== socketID);
+};
+
+const getUserByID = (userID) => {
+  return users.find((user) => user.userID === userID);
+};
+const io = new Server(8800, { cors: { origin: 'http://localhost:3000' } });
+
+io.on('connection', (socket) => {
+  console.log('Connected to a socket.io');
+  io.emit('welcome', 'This is a welcome message');
+
+  socket.on('addUser', (userID) => {
+    addUser(userID, socket.id);
+    io.emit('getUsers', users);
+  });
+
+  socket.on('sendMsg', ({ senderID, receiverID, msg }) => {
+    const user = getUserByID(receiverID);
+    io.to(user?.socketID).emit('receiveMsg', { senderID, msg });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+    removeUser(socket.id);
+    io.emit('getUsers', users);
+  });
 });

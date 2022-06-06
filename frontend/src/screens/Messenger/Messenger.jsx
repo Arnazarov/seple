@@ -7,16 +7,45 @@ import ChatOnline from '../../components/ChatOnline/ChatOnline';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const Messenger = () => {
+  const socket = useRef(io('ws://localhost:8800'));
   const [talks, setTalks] = useState([]);
   const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [liveMessage, setLiveMessage] = useState('');
+  const [incomingMessage, setIncomingMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   const chatScroll = useRef();
-
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    socket.current = io('ws://localhost:8800');
+    socket.current.on('receiveMsg', (data) => {
+      setIncomingMessage({
+        senderID: data.senderID,
+        message: data.msg,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    incomingMessage &&
+      chat?.members.includes(incomingMessage.senderID) &&
+      setMessages((prev) => [...prev, incomingMessage]);
+  }, [incomingMessage, chat?.members]);
+
+  useEffect(() => {
+    socket.current.emit('addUser', user?._id);
+    socket.current.on('getUsers', (users) => {
+      setOnlineUsers(
+        user.following.filter((uf) => users.some((u) => u.userID === uf))
+      );
+    });
+  }, [user]);
 
   useEffect(() => {
     const fetchTalks = async () => {
@@ -29,7 +58,7 @@ const Messenger = () => {
     };
 
     fetchTalks();
-  }, [user]);
+  }, [user._id]);
 
   useEffect(() => {
     if (chat) {
@@ -56,6 +85,14 @@ const Messenger = () => {
       talkID: chat._id,
       message: liveMessage,
     };
+
+    const receiverID = chat.members.find((m) => m !== user._id);
+
+    socket.current.emit('sendMsg', {
+      senderID: user._id,
+      receiverID,
+      msg: liveMessage,
+    });
 
     try {
       const { data } = await axios.post(`/api/message`, msg);
@@ -87,7 +124,7 @@ const Messenger = () => {
               <div className={styles.top}>
                 {messages &&
                   messages.map((msg) => (
-                    <div ref={chatScroll} key={msg._id}>
+                    <div key={msg.createdAt} ref={chatScroll}>
                       <ChatMessage
                         message={msg}
                         self={msg.senderID === user._id}
@@ -124,7 +161,11 @@ const Messenger = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.wrapper}>
-            <ChatOnline />
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentUser={user._id}
+              setChat={setChat}
+            />
           </div>
         </div>
       </div>
