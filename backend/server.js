@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
@@ -18,12 +17,17 @@ dotenv.config();
 // Initialize express app
 const app = express();
 const __dirname = path.resolve();
+
 // Connect to MongoDB server
 mongoConnect();
 
 // Middlewares
 app.use(express.json());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(morgan('dev'));
 
 app.use('/api/users', userRoutes);
@@ -34,8 +38,25 @@ app.use('/api/message', messageRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-app.listen(8000, () => {
-  console.log('Server is running on port 8000'.yellow.bold);
+// --------------------------PRODUCTION---------------------------------
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'frontend/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('Development mode is running...');
+  });
+}
+
+// --------------------------PRODUCTION---------------------------------
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`.yellow.bold);
 });
 
 let users = [];
@@ -52,7 +73,10 @@ const removeUser = (socketID) => {
 const getUserByID = (userID) => {
   return users.find((user) => user.userID === userID);
 };
-const io = new Server(8800, { cors: { origin: 'http://localhost:3000' } });
+const io = new Server(server, {
+  pingTimeout: 60000,
+  cors: { origin: 'http://localhost:3000' },
+});
 
 io.on('connection', (socket) => {
   console.log('Connected to a socket.io');

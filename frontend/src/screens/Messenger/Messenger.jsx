@@ -10,7 +10,8 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 const Messenger = () => {
-  const socket = useRef(io('ws://localhost:8800'));
+  const ENDPOINT = 'https://seple.herokuapp.com';
+  const socket = useRef(io(ENDPOINT));
   const [talks, setTalks] = useState([]);
   const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -22,7 +23,7 @@ const Messenger = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    socket.current = io('ws://localhost:8800');
+    socket.current = io(ENDPOINT);
     socket.current.on('receiveMsg', (data) => {
       setIncomingMessage({
         senderID: data.senderID,
