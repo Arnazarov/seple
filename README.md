@@ -35,7 +35,6 @@ $PROJECT_ROOT
 |   |   +-- screens                     // Page Files
 |   |   +-- App.js                      // App Compnent
 |   |   +-- index.js                    // App Entry Point
-|   |   +-- store.js                    // Redux Store File
 +-- uploads                             // Uploaded Files
 
 ```
@@ -46,7 +45,7 @@ $PROJECT_ROOT
 
 		- bcryptjs					: enables storing of passwords as hashed passwords
 		- colors       				: get colors in your node.js console
-		- cors						: enable CORS with various options
+		- cors					: enable CORS with various options
 		- dotenv                			: loads environment variables from .env file
 		- helmet					: secure your Express apps by setting various HTTP headers 
 		- morgan     					: HTTP request logger middleware for node.js
@@ -59,7 +58,7 @@ $PROJECT_ROOT
 		- @fortawesome/react-fontawesome 		: Font Awesome React component using SVG with JS 
 		- @mui/material 				: Material UI React components 
 		- moment 					: date library for parsing, validating, manipulating, and formatting dates
-		- sass 						: pure JavaScript implementation of Sass								
+		- sass 					: pure JavaScript implementation of Sass
 		- socket.io-client 				: React realtime framework client
 
 ## Steps to Install & Run
